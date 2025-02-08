@@ -3,11 +3,12 @@ package store
 import (
 	"context"
 	"database/sql"
+	"github.com/akhilr007/socials/internal/models"
 )
 
 type Storage struct {
 	Posts interface {
-		Create(ctx context.Context) error
+		Create(ctx context.Context, post *models.Post) error
 	}
 	Users interface {
 		Create(ctx context.Context) error
@@ -16,7 +17,7 @@ type Storage struct {
 
 func NewStorage(db *sql.DB) Storage {
 	return Storage{
-		Posts: &PostsStore{db},
-		Users: &UsersStore{db},
+		Posts: &PostStore{db},
+		Users: &UserStore{db},
 	}
 }
