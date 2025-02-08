@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/akhilr007/socials/internal/store"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"log"
@@ -10,6 +11,7 @@ import (
 
 type application struct {
 	config config
+	store  store.Storage
 }
 
 type config struct {
@@ -30,7 +32,7 @@ func (app *application) mount() http.Handler {
 	// through ctx.Done() that the request has timed out and further
 	// processing should be stopped.
 	r.Use(middleware.Timeout(60 * time.Second))
-	
+
 	r.Route("/v1", func(r chi.Router) {
 		r.Get("/health", app.healthCheckHandler)
 	})
