@@ -11,7 +11,7 @@ type Storage struct {
 		Create(ctx context.Context, post *models.Post) error
 	}
 	Users interface {
-		Create(ctx context.Context) error
+		Create(ctx context.Context, user *models.User) error
 	}
 }
 
